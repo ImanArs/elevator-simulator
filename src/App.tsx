@@ -1,26 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+"use client";
 
-function App() {
-  const [count, setCount] = useState(0)
+import { Application, Assets, Sprite } from "pixi.js";
+
+async function App() {
+  const app = new Application();
+  await app.init({ background: "#1099bb", resizeTo: window });
+
+  // Append the application canvas to the document body
+  document.body.appendChild(app.canvas);
+
+  // Load the bunny texture
+  const texture = await Assets.load("https://pixijs.com/assets/bunny.png");
+
+  // Create a bunny Sprite
+  const bunny = new Sprite(texture);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
@@ -29,7 +27,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
